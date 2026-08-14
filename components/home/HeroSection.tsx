@@ -26,24 +26,24 @@ export function HeroSection() {
       <div className="absolute top-0 right-0 w-96 h-96 bg-[#FF6B00]/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3 pointer-events-none" />
       <div className="absolute bottom-0 left-0 w-72 h-72 bg-white/5 rounded-full blur-2xl translate-y-1/2 -translate-x-1/4 pointer-events-none" />
 
-      <div className="relative max-w-5xl mx-auto px-4 py-20 md:py-28 text-center">
+      <div className="relative max-w-5xl mx-auto px-4 py-10 md:py-16 text-center">
         {/* Badge */}
-        <div className="inline-flex items-center gap-2 bg-white/10 border border-white/20 text-white text-xs font-medium px-4 py-1.5 rounded-full mb-6 backdrop-blur-sm">
+        <div className="inline-flex items-center gap-2 bg-white/10 border border-white/20 text-white text-xs font-medium px-4 py-1.5 rounded-full mb-3 backdrop-blur-sm">
           <span className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
           Pakistan ka #1 Karigar Platform
         </div>
 
         {/* Urdu tagline */}
-        <p className="text-[#FF6B00] font-semibold text-xl mb-2" dir="rtl" lang="ur">
+        <p className="text-[#FF6B00] font-semibold text-lg mb-2" dir="rtl" lang="ur">
           آپکا ماہر، آپکے پاس
         </p>
 
-        <h1 className="text-4xl md:text-6xl font-bold text-white mb-4 leading-tight">
+        <h1 className="text-4xl md:text-5xl font-bold text-white mb-3 leading-tight">
           Apka Bharosa Mand<br />
           <span className="text-[#FF6B00]">KaariGar</span>
         </h1>
 
-        <p className="text-blue-200 text-lg max-w-xl mx-auto mb-10">
+        <p className="text-blue-200 text-base max-w-xl mx-auto mb-6">
           Plumbers, electricians, tutors & more — apke sheher mein. Seedha call karein. Cash mein payment.
         </p>
 
@@ -87,7 +87,7 @@ export function HeroSection() {
         </form>
 
         {/* Trust stats */}
-        <div className="flex flex-wrap justify-center gap-6 mt-10 text-center">
+        <div className="flex flex-wrap justify-center gap-6 mt-6 text-center">
           {[
             { num: '500+', label: 'Karigars', icon: '👷' },
             { num: '4', label: 'Cities', icon: '🏙️' },

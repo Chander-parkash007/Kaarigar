@@ -5,7 +5,7 @@ import { cn } from '@/lib/utils'
 
 const navItems = [
   { href: '/admin', label: 'Dashboard', icon: '📊', exact: true },
-  { href: '/admin/workers', label: 'Workers', icon: '👷' },
+  { href: '/admin/workers', label: 'Karigars', icon: '👷' },
   { href: '/admin/pending', label: 'Pending Payments', icon: '💰' },
   { href: '/admin/logs', label: 'Activity Log', icon: '📋' },
 ]
@@ -23,7 +23,7 @@ export function AdminSidebar() {
     <aside className="w-56 bg-[#1B3A6B] text-white flex flex-col min-h-screen">
       <div className="p-5 border-b border-white/20">
         <div className="font-bold text-lg">
-          <span className="text-[#FF6B00]">Hire</span>Local
+          <span className="text-[#FF6B00]">Kaari</span>Gar
         </div>
         <div className="text-blue-300 text-xs mt-0.5">Admin Panel</div>
       </div>

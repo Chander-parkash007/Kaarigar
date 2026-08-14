@@ -187,7 +187,7 @@ export function RegisterForm() {
       )}
 
       <Button type="submit" variant="primary" size="lg" loading={loading} className="w-full">
-        Create Free Profile
+        Create Free KaariGar Profile
       </Button>
 
       <p className="text-center text-sm text-gray-500">

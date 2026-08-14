@@ -8,8 +8,8 @@ export function Navbar() {
   const pathname = usePathname()
 
   const links = [
-    { href: '/search', label: 'Find Workers' },
-    { href: '/register', label: 'Join as Pro' },
+    { href: '/search', label: 'Karigar Dhoondhein' },
+    { href: '/register', label: 'Join as Karigar' },
   ]
 
   return (
@@ -17,8 +17,8 @@ export function Navbar() {
       <div className="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-1.5 font-bold text-xl">
-          <span className="text-[#FF6B00]">Hire</span>
-          <span>Local</span>
+          <span className="text-[#FF6B00]">Kaari</span>
+          <span>Gar</span>
           <span className="hidden sm:inline text-xs text-blue-300 font-normal ml-1 border border-blue-400/30 px-1.5 py-0.5 rounded">
             🇵🇰 Pakistan
           </span>
@@ -55,7 +55,7 @@ export function Navbar() {
             href="/login"
             className="ml-2 bg-[#FF6B00] hover:bg-[#e05f00] px-5 py-2 rounded-lg transition-colors font-semibold"
           >
-            Worker Login
+            Karigar Login
           </Link>
         </div>
 
@@ -100,7 +100,7 @@ export function Navbar() {
             onClick={() => setMenuOpen(false)}
             className="px-3 py-2.5 rounded-lg text-[#FF6B00] font-semibold hover:bg-white/10 transition-colors"
           >
-            Worker Login
+            Karigar Login
           </Link>
         </div>
       )}

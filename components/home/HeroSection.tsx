@@ -30,21 +30,21 @@ export function HeroSection() {
         {/* Badge */}
         <div className="inline-flex items-center gap-2 bg-white/10 border border-white/20 text-white text-xs font-medium px-4 py-1.5 rounded-full mb-6 backdrop-blur-sm">
           <span className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
-          Pakistan ka #1 Local Services Platform
+          Pakistan ka #1 Karigar Platform
         </div>
 
         {/* Urdu tagline */}
         <p className="text-[#FF6B00] font-semibold text-xl mb-2" dir="rtl" lang="ur">
-          آپکا بھروسہ، آپکا کام
+          آپکا ماہر، آپکے پاس
         </p>
 
         <h1 className="text-4xl md:text-6xl font-bold text-white mb-4 leading-tight">
-          Hire Trusted Local<br />
-          <span className="text-[#FF6B00]">Professionals</span>
+          Apka Bharosa Mand<br />
+          <span className="text-[#FF6B00]">KaariGar</span>
         </h1>
 
         <p className="text-blue-200 text-lg max-w-xl mx-auto mb-10">
-          Plumbers, electricians, tutors & more — in your city. Call directly. Pay in cash.
+          Plumbers, electricians, tutors & more — apke sheher mein. Seedha call karein. Cash mein payment.
         </p>
 
         {/* Search Card */}
@@ -86,10 +86,10 @@ export function HeroSection() {
           {error && <p className="text-red-500 text-xs mt-2 text-left px-1">{error}</p>}
         </form>
 
-        {/* Trust badges */}
+        {/* Trust stats */}
         <div className="flex flex-wrap justify-center gap-6 mt-10 text-center">
           {[
-            { num: '500+', label: 'Workers', icon: '👷' },
+            { num: '500+', label: 'Karigars', icon: '👷' },
             { num: '4', label: 'Cities', icon: '🏙️' },
             { num: '10', label: 'Services', icon: '🛠️' },
             { num: '100%', label: 'Free to Join', icon: '✅' },

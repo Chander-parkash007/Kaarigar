@@ -6,18 +6,17 @@ export function Footer() {
 
   return (
     <footer className="bg-[#0f2240] text-white mt-16">
-      {/* Main footer */}
       <div className="max-w-6xl mx-auto px-4 py-12 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
         {/* Brand */}
         <div className="md:col-span-1">
           <div className="font-bold text-2xl mb-3">
-            <span className="text-[#FF6B00]">Hire</span>Local
+            <span className="text-[#FF6B00]">Kaari</span>Gar
           </div>
-          <p className="text-blue-300 text-sm leading-relaxed mb-4">
-            Pakistan ka bharosa mand local services platform. Apke ghar ke kaam ke liye trusted professionals.
+          <p className="text-blue-300 text-sm leading-relaxed mb-3">
+            Pakistan ka bharosa mand karigar platform. Apke ghar ke kaam ke liye trusted professionals.
           </p>
-          <p className="text-blue-300 text-sm" dir="rtl" lang="ur">
-            آپکا بھروسہ، آپکا کام
+          <p className="text-blue-300 text-sm font-medium" dir="rtl" lang="ur">
+            آپکا ماہر، آپکے پاس
           </p>
         </div>
 
@@ -58,9 +57,9 @@ export function Footer() {
           <h4 className="font-semibold text-white mb-4 text-sm uppercase tracking-wider">Quick Links</h4>
           <div className="flex flex-col gap-2 mb-6">
             {[
-              { href: '/search', label: 'Find Workers' },
-              { href: '/register', label: 'Register as Worker' },
-              { href: '/login', label: 'Worker Login' },
+              { href: '/search', label: 'Karigar Dhoondhein' },
+              { href: '/register', label: 'Karigar Banein' },
+              { href: '/login', label: 'Karigar Login' },
               { href: '/admin/login', label: 'Admin Panel' },
             ].map(link => (
               <Link
@@ -84,8 +83,8 @@ export function Footer() {
       {/* Bottom bar */}
       <div className="border-t border-white/10">
         <div className="max-w-6xl mx-auto px-4 py-4 flex flex-col sm:flex-row items-center justify-between gap-2">
-          <p className="text-blue-400 text-xs">© {currentYear} HireLocal. All rights reserved.</p>
-          <p className="text-blue-400 text-xs">Made with ❤️ for Pakistan</p>
+          <p className="text-blue-400 text-xs">© {currentYear} KaariGar. All rights reserved.</p>
+          <p className="text-blue-400 text-xs">Made with ❤️ for Pakistan 🇵🇰</p>
         </div>
       </div>
     </footer>

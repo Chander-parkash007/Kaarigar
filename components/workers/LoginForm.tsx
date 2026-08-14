@@ -64,7 +64,7 @@ export function LoginForm() {
       <div className="text-center space-y-2">
         <p className="text-sm text-gray-500">
           Not registered?{' '}
-          <a href="/register" className="text-[#FF6B00] font-medium hover:underline">Create free profile</a>
+          <a href="/register" className="text-[#FF6B00] font-medium hover:underline">Join KaariGar free</a>
         </p>
         <p className="text-sm text-gray-400">
           Forgot password?{' '}

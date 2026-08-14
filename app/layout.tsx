@@ -2,9 +2,9 @@ import type { Metadata } from 'next'
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: 'HireLocal — Apka Bharosa, Apka Kaam',
-  description: 'Pakistan ka number 1 local service marketplace. Trusted plumbers, electricians, tutors, and more in your area.',
-  keywords: 'plumber lahore, electrician karachi, tutor islamabad, local services pakistan',
+  title: 'KaariGar — Apka ماہر, Apke Paas',
+  description: 'Pakistan ka number 1 local karigar platform. Trusted plumbers, electricians, tutors, and more in your area. کاریگر ڈھونڈیں آسانی سے۔',
+  keywords: 'karigar lahore, plumber karachi, electrician islamabad, tutor hyderabad, local services pakistan, kaam wala, kaarigar',
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

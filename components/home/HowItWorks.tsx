@@ -58,7 +58,7 @@ export function HowItWorks() {
         {/* CTA */}
         <div className="text-center mt-12 bg-gradient-to-r from-[#1B3A6B] to-[#0f2240] rounded-2xl p-8 text-white">
           <p className="text-blue-200 text-sm mb-1">Are you a skilled professional?</p>
-          <h3 className="text-2xl font-bold mb-4">Join HireLocal — It&apos;s Free!</h3>
+          <h3 className="text-2xl font-bold mb-4">Join KaariGar — It&apos;s Free!</h3>
           <div className="flex flex-wrap justify-center gap-4 mb-6 text-sm text-blue-200">
             <span>✅ No commission fees</span>
             <span>✅ Direct customer contact</span>

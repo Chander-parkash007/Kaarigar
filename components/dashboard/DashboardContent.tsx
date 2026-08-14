@@ -24,7 +24,7 @@ export function DashboardContent({ worker, portfolioPhotos }: Props) {
   const verifiedExpiringSoon = isExpiringSoon(worker.verified_expires_at)
   const boostExpiringSoon = isExpiringSoon(worker.boost_expires_at)
 
-  const whatsappUpgrade = `https://wa.me/${ADMIN_WHATSAPP}?text=${encodeURIComponent(`Hi! I want to upgrade my HireLocal profile. My name is ${worker.full_name} and my phone is ${worker.phone}.`)}`
+  const whatsappUpgrade = `https://wa.me/${ADMIN_WHATSAPP}?text=${encodeURIComponent(`Hi! I want to upgrade my KaariGar profile. My name is ${worker.full_name} and my phone is ${worker.phone}.`)}`
 
   const openPaymentModal = (type: 'boost' | 'verified') => {
     setUpgradeType(type)
@@ -37,7 +37,7 @@ export function DashboardContent({ worker, portfolioPhotos }: Props) {
       <div className="flex items-center justify-between mb-6 flex-wrap gap-3">
         <div>
           <h1 className="text-2xl font-bold text-[#1B3A6B]">👋 Welcome, {worker.full_name.split(' ')[0]}!</h1>
-          <p className="text-gray-500 text-sm">Manage your HireLocal profile</p>
+          <p className="text-gray-500 text-sm">Manage your KaariGar profile</p>
         </div>
         <div className="flex gap-3">
           <Button variant="outline" size="sm" onClick={() => setEditOpen(true)}>✏️ Edit Profile</Button>

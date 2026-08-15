@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <!-- Background circle -->
+  <circle cx="16" cy="16" r="16" fill="#1B3A6B"/>
+  <!-- Wrench tool representing karigar/craftsman -->
+  <text x="16" y="22" font-size="18" text-anchor="middle" font-family="Arial, sans-serif" fill="#FF6B00">🔧</text>
+</svg>

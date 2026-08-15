@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32">
+  <!-- Dark blue background -->
+  <rect width="32" height="32" rx="8" fill="#1B3A6B"/>
+  <!-- Orange K letter -->
+  <text x="5" y="24" font-size="22" font-weight="bold" font-family="Arial Black, Arial, sans-serif" fill="#FF6B00">K</text>
+  <!-- Small orange dot for style -->
+  <circle cx="26" cy="8" r="4" fill="#FF6B00"/>
+</svg>

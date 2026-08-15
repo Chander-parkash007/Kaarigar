@@ -48,10 +48,24 @@ export function AdminSidebar() {
         })}
       </nav>
 
-      <div className="p-3 border-t border-white/20">
+      <div className="p-3 border-t border-white/20 space-y-1">
+        <div className="px-3 py-1.5 text-xs text-blue-400 uppercase tracking-wider">Export</div>
+        {[
+          { label: '📥 Workers CSV', type: 'workers' },
+          { label: '📥 Payments CSV', type: 'payments' },
+          { label: '📥 Bookings CSV', type: 'bookings' },
+        ].map(exp => (
+          <a
+            key={exp.type}
+            href={`/api/admin/export?type=${exp.type}`}
+            className="flex items-center gap-2 px-3 py-2 rounded-lg text-xs text-blue-200 hover:bg-white/10 hover:text-white transition-colors"
+          >
+            {exp.label}
+          </a>
+        ))}
         <button
           onClick={handleLogout}
-          className="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm text-blue-200 hover:bg-white/10 hover:text-white transition-colors"
+          className="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm text-blue-200 hover:bg-white/10 hover:text-white transition-colors mt-2"
         >
           🚪 Logout
         </button>

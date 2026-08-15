@@ -2,6 +2,7 @@
 import Link from 'next/link'
 import { useState } from 'react'
 import { usePathname } from 'next/navigation'
+import { UrduToggle } from '@/components/ui/UrduToggle'
 
 export function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false)
@@ -51,6 +52,7 @@ export function Navbar() {
             Dashboard
           </Link>
 
+          <UrduToggle />
           <Link
             href="/login"
             className="ml-2 bg-[#FF6B00] hover:bg-[#e05f00] px-5 py-2 rounded-lg transition-colors font-semibold"

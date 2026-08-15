@@ -40,11 +40,13 @@ export async function POST(req: NextRequest) {
       }, { status: 403 })
     }
 
-    const { worker_id, reviewer_name, rating, review_text } = await req.json()
+    const { worker_id, rating, review_text } = await req.json()
 
     if (!worker_id) return NextResponse.json({ error: 'Worker ID is required' }, { status: 400 })
-    if (!reviewer_name?.trim()) return NextResponse.json({ error: 'Reviewer name is required' }, { status: 400 })
     if (!rating || rating < 1 || rating > 5) return NextResponse.json({ error: 'Rating must be between 1 and 5' }, { status: 400 })
+
+    // Always use the customer's registered name — prevents fake name manipulation
+    const reviewer_name = customer.full_name
 
     // Verify worker exists and is active
     const { data: worker } = await supabase

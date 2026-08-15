@@ -86,7 +86,7 @@ export function ReviewForm({ workerId, workerName }: ReviewFormProps) {
         <div className="text-3xl mb-2">✅</div>
         <h3 className="font-semibold text-green-800">{tr('review_success_title')}</h3>
         <p className="text-green-600 text-sm mt-1">
-          {lang === 'ur' ? 'آپکا جائزہ شامل کر دیا گیا!' : 'Your review has been submitted!'}
+          {lang === 'ur' ? 'آپکا شکریہ! جائزہ شامل کر دیا گیا۔' : 'Thank you! Your review has been added.'}
         </p>
       </div>
     )
@@ -156,10 +156,18 @@ export function ReviewForm({ workerId, workerName }: ReviewFormProps) {
         </span>
       </div>
       <form onSubmit={handleSubmit} className="space-y-4" noValidate>
-        <Input label={tr('review_name')} id="reviewer-name" value={name}
-          onChange={e => setName(e.target.value)}
-          placeholder={tr('review_name_placeholder')}
-          error={errors.name} maxLength={100} />
+        {/* Name is locked to the registered account name — prevents fake name changes */}
+        <div>
+          <label className="text-sm font-medium text-[#2D2D2D] block mb-1">
+            {tr('review_name')}
+          </label>
+          <div className="w-full px-4 py-2.5 border border-gray-200 rounded-lg text-sm bg-gray-50 text-gray-600 flex items-center justify-between">
+            <span>{customer.full_name}</span>
+            <span className="text-xs text-gray-400">
+              {lang === 'ur' ? '🔒 اکاؤنٹ نام' : '🔒 Account name'}
+            </span>
+          </div>
+        </div>
         <div>
           <label className="text-sm font-medium text-[#2D2D2D] block mb-1">{tr('review_rating')}</label>
           <StarRating value={rating} onChange={setRating} size="lg" />

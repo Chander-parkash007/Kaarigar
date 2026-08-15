@@ -100,7 +100,7 @@ export default async function WorkerProfilePage({ params }: Props) {
                 📞 Call Now
               </a>
               <a
-                href={getWhatsAppLink(worker.phone, `Hi, I found your profile on KaariGar. I need ${categoryInfo?.label || worker.category} service.`)}
+                href={getWhatsAppLink(worker.phone, `السلام علیکم ${worker.full_name} بھائی! 👋\n\nمیں نے آپکا پروفائل KaariGar پر دیکھا۔\nمجھے ${categoryInfo?.urdu || categoryInfo?.label || worker.category} کی ضرورت ہے۔\nبراہ کرم مجھ سے رابطہ کریں۔\n\n(Hi! I need ${categoryInfo?.label || worker.category} service. Found you on KaariGar.pk)`)}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex-1 bg-[#25D366] text-white rounded-xl py-3.5 px-6 font-semibold text-center hover:bg-[#20b957] transition-colors flex items-center justify-center gap-2"

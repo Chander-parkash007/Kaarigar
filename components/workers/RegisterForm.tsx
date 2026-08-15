@@ -70,7 +70,7 @@ export function RegisterForm() {
       const data = await res.json()
 
       if (res.ok) {
-        router.push('/dashboard')
+        window.location.href = '/dashboard'
       } else {
         setErrors({ form: data.error || 'Registration failed. Please try again.' })
       }

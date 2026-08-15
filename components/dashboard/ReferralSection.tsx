@@ -1,7 +1,5 @@
 'use client'
 import { useState } from 'react'
-import { Button } from '@/components/ui/Button'
-import { Input } from '@/components/ui/Input'
 
 export function ReferralSection({ workerPhone }: { workerPhone: string }) {
   const [phone, setPhone] = useState('')
@@ -58,9 +56,13 @@ export function ReferralSection({ workerPhone }: { workerPhone: string }) {
           maxLength={11}
           className="flex-1 px-4 py-2.5 rounded-lg text-[#1B3A6B] text-sm focus:outline-none focus:ring-2 focus:ring-white"
         />
-        <Button type="submit" loading={loading} className="bg-white text-purple-700 hover:bg-purple-50 font-semibold px-4 py-2.5 rounded-lg text-sm whitespace-nowrap">
-          Refer Now
-        </Button>
+        <button
+          type="submit"
+          disabled={loading}
+          className="bg-white text-purple-700 hover:bg-purple-50 font-semibold px-4 py-2.5 rounded-lg text-sm whitespace-nowrap disabled:opacity-50 transition-colors"
+        >
+          {loading ? 'Saving...' : 'Refer Now'}
+        </button>
       </form>
 
       {error && <p className="text-red-300 text-xs mb-2">⚠️ {error}</p>}

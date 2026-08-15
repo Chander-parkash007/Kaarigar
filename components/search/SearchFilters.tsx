@@ -5,13 +5,14 @@ import { CATEGORIES, CITIES } from '@/lib/constants'
 import { Button } from '@/components/ui/Button'
 
 interface Props {
-  initialParams: { category?: string; city?: string; area?: string; rating?: string; verified?: string }
+  initialParams: { category?: string; city?: string; area?: string; rating?: string; verified?: string; q?: string }
 }
 
 export function SearchFilters({ initialParams }: Props) {
   const router = useRouter()
   const searchParams = useSearchParams()
 
+  const [q, setQ] = useState(initialParams.q || '')
   const [category, setCategory] = useState(initialParams.category || '')
   const [city, setCity] = useState(initialParams.city || '')
   const [area, setArea] = useState(initialParams.area || '')
@@ -26,6 +27,7 @@ export function SearchFilters({ initialParams }: Props) {
 
   function applyFilters() {
     const params = new URLSearchParams()
+    if (q) params.set('q', q)
     if (category) params.set('category', category)
     if (city) params.set('city', city)
     if (area) params.set('area', area)
@@ -35,6 +37,7 @@ export function SearchFilters({ initialParams }: Props) {
   }
 
   function resetFilters() {
+    setQ('')
     setCategory('')
     setCity('')
     setArea('')
@@ -46,6 +49,19 @@ export function SearchFilters({ initialParams }: Props) {
   return (
     <div className="bg-white rounded-xl border border-gray-200 p-4 sticky top-20 space-y-4">
       <h3 className="font-semibold text-[#1B3A6B]">Filters</h3>
+
+      {/* Name search */}
+      <div>
+        <label className="text-xs font-medium text-gray-500 uppercase tracking-wide block mb-1">Search by Name</label>
+        <input
+          type="text"
+          value={q}
+          onChange={e => setQ(e.target.value)}
+          placeholder="e.g. Ahmed Ali..."
+          className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#1B3A6B]"
+          onKeyDown={e => e.key === 'Enter' && applyFilters()}
+        />
+      </div>
 
       {/* Category */}
       <div>

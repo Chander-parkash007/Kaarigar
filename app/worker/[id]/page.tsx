@@ -98,13 +98,22 @@ export default async function WorkerProfilePage({ params }: Props) {
                 📞 Call Now
               </a>
               <a
-                href={getWhatsAppLink(worker.phone, `Hi, I found your profile on HireLocal. I need ${categoryInfo?.label || worker.category} service.`)}
+                href={getWhatsAppLink(worker.phone, `Hi, I found your profile on KaariGar. I need ${categoryInfo?.label || worker.category} service.`)}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex-1 bg-[#25D366] text-white rounded-xl py-3.5 px-6 font-semibold text-center hover:bg-[#20b957] transition-colors flex items-center justify-center gap-2"
                 aria-label={`WhatsApp ${worker.full_name}`}
               >
                 💬 WhatsApp
+              </a>
+              <a
+                href={`https://wa.me/?text=${encodeURIComponent(`${worker.full_name} - ${categoryInfo?.label || worker.category} in ${worker.city}\n\nFind them on KaariGar: ${process.env.NEXT_PUBLIC_SITE_URL || 'https://kaarigar-pk.vercel.app'}/worker/${worker.id}`)}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="sm:flex-none bg-gray-100 text-gray-700 rounded-xl py-3.5 px-5 font-semibold text-center hover:bg-gray-200 transition-colors flex items-center justify-center gap-2"
+                aria-label="Share this profile"
+              >
+                🔗 Share
               </a>
             </div>
 

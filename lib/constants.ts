@@ -27,9 +27,29 @@ export const CITIES: Record<string, string[]> = {
     'G-9', 'G-10', 'G-11', 'G-13', 'Bahria Town',
     'DHA', 'E-7', 'E-11', 'I-8', 'Other',
   ],
+  Rawalpindi: [
+    'Saddar', 'Bahria Town', 'DHA', 'Chaklala', 'Westridge',
+    'Satellite Town', '6th Road', 'Gulzar-e-Quaid', 'Morgah', 'Other',
+  ],
+  Faisalabad: [
+    'D-Ground', 'Gulberg', 'Jinnah Colony', 'Madina Town', 'Susan Road',
+    'Peoples Colony', 'Ghulam Muhammad Abad', 'Millat Road', 'Satiana Road', 'Other',
+  ],
+  Multan: [
+    'Cantt', 'Gulgasht Colony', 'Shah Rukn-e-Alam', 'Bosan Road', 'Bahauddin Zakariya',
+    'New Multan', 'Gulshan-e-Iqbal', 'Qasim Bela', 'Masoom Shah Road', 'Other',
+  ],
   Hyderabad: [
     'Latifabad', 'Qasimabad', 'Hirabad', 'Saddar', 'City',
     'Pakka Qila', 'Naseem Nagar', 'Hussainabad', 'Auto Bhan Road', 'Other',
+  ],
+  Peshawar: [
+    'Hayatabad', 'University Town', 'Cantt', 'Saddar', 'Ring Road',
+    'Gulbahar', 'Dalazak Road', 'Warsak Road', 'Board Bazaar', 'Other',
+  ],
+  Quetta: [
+    'Satellite Town', 'Jinnah Town', 'Cantt', 'Brewery Road', 'Zarghoon Road',
+    'Sariab Road', 'Airport Road', 'Spinny Road', 'Joint Road', 'Other',
   ],
 }
 

@@ -5,7 +5,7 @@ import { SearchFilters } from '@/components/search/SearchFilters'
 import { Suspense } from 'react'
 
 interface SearchPageProps {
-  searchParams: Promise<{ category?: string; city?: string; area?: string; rating?: string; verified?: string; page?: string }>
+  searchParams: Promise<{ category?: string; city?: string; area?: string; rating?: string; verified?: string; page?: string; q?: string }>
 }
 
 export default async function SearchPage({ searchParams }: SearchPageProps) {

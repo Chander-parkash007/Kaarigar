@@ -60,7 +60,7 @@ export async function POST(req: NextRequest) {
     // Hash password
     const password_hash = await bcrypt.hash(password, 10)
 
-    // Calculate free trial expiry
+    // Give every new karigar a 14-day free boost trial
     const boostExpiry = new Date()
     boostExpiry.setDate(boostExpiry.getDate() + FREE_TRIAL_DAYS)
 

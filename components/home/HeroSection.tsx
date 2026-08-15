@@ -90,7 +90,7 @@ export function HeroSection() {
         <div className="flex flex-wrap justify-center gap-6 mt-6 text-center">
           {[
             { num: '500+', label: 'Karigars', icon: '👷' },
-            { num: '4', label: 'Cities', icon: '🏙️' },
+            { num: '9', label: 'Cities', icon: '🏙️' },
             { num: '10', label: 'Services', icon: '🛠️' },
             { num: '100%', label: 'Free to Join', icon: '✅' },
           ].map(stat => (

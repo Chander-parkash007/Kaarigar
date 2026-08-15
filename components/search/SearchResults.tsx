@@ -3,7 +3,7 @@ import { Worker } from '@/lib/types'
 import { WorkerCard } from '@/components/workers/WorkerCard'
 
 interface Props {
-  params: { category?: string; city?: string; area?: string; rating?: string; verified?: string; page?: string }
+  params: { category?: string; city?: string; area?: string; rating?: string; verified?: string; page?: string; q?: string }
 }
 
 const PAGE_SIZE = 12
@@ -25,6 +25,8 @@ export async function SearchResults({ params }: Props) {
   if (params.area) query = query.eq('area', params.area)
   if (params.rating) query = query.gte('average_rating', parseFloat(params.rating))
   if (params.verified === 'true') query = query.gt('verified_expires_at', now)
+  // Search by name
+  if (params.q) query = query.ilike('full_name', `%${params.q}%`)
 
   // Server-side ranking: verified first → boosted → rating desc
   // We fetch all and do a stable sort by tier+rating, then paginate

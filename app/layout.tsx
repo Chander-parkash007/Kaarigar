@@ -12,6 +12,7 @@ export const metadata: Metadata = {
     shortcut: '/icon.svg',
     apple: '/icon.svg',
   },
+  manifest: '/manifest.json',
   openGraph: {
     title: 'KaariGar — Apka Bharosa Mand Karigar',
     description: 'Pakistan ka #1 local karigar platform. Find trusted plumbers, electricians, tutors & more in your city.',

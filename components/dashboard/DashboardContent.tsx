@@ -1,5 +1,5 @@
 'use client'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Image from 'next/image'
 import { Worker, PortfolioPhoto } from '@/lib/types'
 import { getEffectiveTier, formatExpiry, isExpiringSoon, isExpired } from '@/lib/utils'
@@ -14,15 +14,29 @@ interface Props {
   portfolioPhotos: PortfolioPhoto[]
 }
 
+function getDaysLeft(dateStr: string | null): number {
+  if (!dateStr) return 0
+  const diff = new Date(dateStr).getTime() - Date.now()
+  return Math.max(0, Math.ceil(diff / (1000 * 60 * 60 * 24)))
+}
+
 export function DashboardContent({ worker, portfolioPhotos }: Props) {
   const [editOpen, setEditOpen] = useState(false)
   const [paymentModalOpen, setPaymentModalOpen] = useState(false)
   const [upgradeType, setUpgradeType] = useState<'boost' | 'verified'>('boost')
+  const [dismissed, setDismissed] = useState(false)
+
   const tier = getEffectiveTier(worker)
   const verifiedActive = !isExpired(worker.verified_expires_at)
   const boostActive = !isExpired(worker.boost_expires_at)
   const verifiedExpiringSoon = isExpiringSoon(worker.verified_expires_at)
   const boostExpiringSoon = isExpiringSoon(worker.boost_expires_at)
+
+  const boostDaysLeft = getDaysLeft(worker.boost_expires_at)
+  const verifiedDaysLeft = getDaysLeft(worker.verified_expires_at)
+
+  // Detect if this is the free trial (boost set but tier is still 'free')
+  const isOnFreeTrial = worker.tier === 'free' && boostActive && boostDaysLeft > 0
 
   const whatsappUpgrade = `https://wa.me/${ADMIN_WHATSAPP}?text=${encodeURIComponent(`Hi! I want to upgrade my KaariGar profile. My name is ${worker.full_name} and my phone is ${worker.phone}.`)}`
 
@@ -30,6 +44,12 @@ export function DashboardContent({ worker, portfolioPhotos }: Props) {
     setUpgradeType(type)
     setPaymentModalOpen(true)
   }
+
+  // Banner config
+  const showTrialBanner = isOnFreeTrial && !dismissed
+  const showExpiryBanner = !isOnFreeTrial && (verifiedExpiringSoon || boostExpiringSoon) && !dismissed
+  const trialUrgent = boostDaysLeft <= 3
+  const trialWarning = boostDaysLeft <= 7 && boostDaysLeft > 3
 
   return (
     <div className="max-w-4xl mx-auto px-4 py-8">
@@ -48,22 +68,72 @@ export function DashboardContent({ worker, portfolioPhotos }: Props) {
         </div>
       </div>
 
-      {/* Expiry Warnings */}
-      {(verifiedExpiringSoon || boostExpiringSoon) && (
-        <div className="bg-yellow-50 border border-yellow-300 rounded-xl p-4 mb-6 flex items-start gap-3">
-          <span className="text-2xl">⚠️</span>
-          <div>
-            <p className="font-semibold text-yellow-800">Your upgrade is expiring soon!</p>
-            <p className="text-yellow-700 text-sm">
-              {verifiedExpiringSoon && `Verified Badge expires on ${formatExpiry(worker.verified_expires_at)}. `}
-              {boostExpiringSoon && `Profile Boost expires on ${formatExpiry(worker.boost_expires_at)}. `}
-              Renew now to keep your visibility.
-            </p>
-            <a href={whatsappUpgrade} target="_blank"
-              className="inline-block mt-2 text-sm font-medium text-green-700 hover:underline">
-              💬 WhatsApp us to renew →
-            </a>
+      {/* ── Trial / Expiry Banner ── */}
+      {showTrialBanner && (
+        <div className={`relative rounded-xl p-4 mb-6 flex items-start gap-3 border ${
+          trialUrgent
+            ? 'bg-red-50 border-red-300'
+            : trialWarning
+            ? 'bg-yellow-50 border-yellow-300'
+            : 'bg-blue-50 border-blue-200'
+        }`}>
+          <span className="text-2xl">{trialUrgent ? '🚨' : trialWarning ? '⚠️' : '🎁'}</span>
+          <div className="flex-1">
+            {trialUrgent ? (
+              <>
+                <p className="font-bold text-red-800">Free trial expires in {boostDaysLeft} day{boostDaysLeft !== 1 ? 's' : ''}!</p>
+                <p className="text-red-700 text-sm mt-0.5">After this your profile will drop from Featured. Upgrade now to keep getting customers.</p>
+              </>
+            ) : trialWarning ? (
+              <>
+                <p className="font-bold text-yellow-800">Free trial ending soon — {boostDaysLeft} days left</p>
+                <p className="text-yellow-700 text-sm mt-0.5">You&apos;re currently Featured for free. Upgrade before {formatExpiry(worker.boost_expires_at)} to stay on top.</p>
+              </>
+            ) : (
+              <>
+                <p className="font-bold text-blue-800">🎉 You have {boostDaysLeft} days of free Featured listing!</p>
+                <p className="text-blue-700 text-sm mt-0.5">Your profile is currently Featured and appearing higher in search. Upgrade before trial ends to keep this advantage.</p>
+              </>
+            )}
+            <div className="flex gap-3 mt-3 flex-wrap">
+              <button
+                onClick={() => openPaymentModal('boost')}
+                className={`text-sm font-semibold px-4 py-1.5 rounded-lg transition-colors ${
+                  trialUrgent ? 'bg-red-600 text-white hover:bg-red-700' : 'bg-[#FF6B00] text-white hover:bg-[#e05f00]'
+                }`}
+              >
+                Upgrade Now — Rs. {BOOST_PRICE_WEEKLY}/week
+              </button>
+              <a href={whatsappUpgrade} target="_blank"
+                className="text-sm font-medium text-green-700 hover:underline flex items-center gap-1">
+                💬 WhatsApp us
+              </a>
+            </div>
           </div>
+          <button onClick={() => setDismissed(true)} className="text-gray-400 hover:text-gray-600 text-lg leading-none flex-shrink-0">×</button>
+        </div>
+      )}
+
+      {showExpiryBanner && (
+        <div className="relative bg-yellow-50 border border-yellow-300 rounded-xl p-4 mb-6 flex items-start gap-3">
+          <span className="text-2xl">⚠️</span>
+          <div className="flex-1">
+            <p className="font-semibold text-yellow-800">Your upgrade is expiring soon!</p>
+            <p className="text-yellow-700 text-sm mt-0.5">
+              {verifiedExpiringSoon && `✅ Verified Badge expires in ${verifiedDaysLeft} day${verifiedDaysLeft !== 1 ? 's' : ''} (${formatExpiry(worker.verified_expires_at)}). `}
+              {boostExpiringSoon && `⭐ Profile Boost expires in ${boostDaysLeft} day${boostDaysLeft !== 1 ? 's' : ''} (${formatExpiry(worker.boost_expires_at)}). `}
+            </p>
+            <div className="flex gap-3 mt-2 flex-wrap">
+              <button onClick={() => openPaymentModal('boost')}
+                className="text-sm font-semibold text-[#FF6B00] hover:underline">
+                Renew now →
+              </button>
+              <a href={whatsappUpgrade} target="_blank" className="text-sm font-medium text-green-700 hover:underline">
+                💬 WhatsApp us
+              </a>
+            </div>
+          </div>
+          <button onClick={() => setDismissed(true)} className="text-gray-400 hover:text-gray-600 text-lg leading-none flex-shrink-0">×</button>
         </div>
       )}
 

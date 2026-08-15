@@ -5,6 +5,7 @@ import { verifyCustomerToken } from '@/lib/auth'
 import { Navbar } from '@/components/layout/Navbar'
 import { Footer } from '@/components/layout/Footer'
 import { CustomerDashboard } from '@/components/customers/CustomerDashboard'
+import { VerifyEmailBanner } from '@/components/customers/VerifyEmailBanner'
 
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -28,15 +29,14 @@ export default async function CustomerPage() {
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const savedKarigars = (savedRes.data || []) as any[]
+  const isVerified = (customerRes.data as any).is_email_verified === true
 
   return (
     <>
       <Navbar />
+      {!isVerified && <VerifyEmailBanner customerName={customerRes.data.full_name} />}
       <main className="min-h-screen bg-[#F8F9FA]">
-        <CustomerDashboard
-          customer={customerRes.data}
-          savedKarigars={savedKarigars}
-        />
+        <CustomerDashboard customer={customerRes.data} savedKarigars={savedKarigars} />
       </main>
       <Footer />
     </>

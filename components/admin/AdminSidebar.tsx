@@ -7,6 +7,7 @@ const navItems = [
   { href: '/admin', label: 'Dashboard', icon: '📊', exact: true },
   { href: '/admin/workers', label: 'Karigars', icon: '👷' },
   { href: '/admin/bookings', label: 'Bookings', icon: '📋' },
+  { href: '/admin/reviews', label: 'Reviews', icon: '⭐' },
   { href: '/admin/pending', label: 'Pending Payments', icon: '💰' },
   { href: '/admin/logs', label: 'Activity Log', icon: '📋' },
 ]

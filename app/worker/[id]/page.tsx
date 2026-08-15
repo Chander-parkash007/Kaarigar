@@ -23,7 +23,7 @@ export default async function WorkerProfilePage({ params }: Props) {
 
   const [workerRes, reviewsRes, photosRes] = await Promise.all([
     supabase.from('workers').select('*').eq('id', id).eq('status', 'active').single(),
-    supabase.from('reviews').select('*').eq('worker_id', id).order('created_at', { ascending: false }),
+    supabase.from('reviews').select('*').eq('worker_id', id).eq('status', 'approved').order('created_at', { ascending: false }),
     supabase.from('portfolio_photos').select('*').eq('worker_id', id).order('created_at', { ascending: false }),
   ])
 

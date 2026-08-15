@@ -34,6 +34,14 @@ export function proxy(req: NextRequest) {
     }
   }
 
+  // ── Customer dashboard ────────────────────────────────────────────
+  if (pathname === '/customer') {
+    const token = req.cookies.get('customer_token')?.value
+    if (!token) {
+      return NextResponse.redirect(new URL('/customer/login', req.url))
+    }
+  }
+
   // ── Protected admin API routes ────────────────────────────────────
   if (pathname.startsWith('/api/admin') && pathname !== '/api/admin/login') {
     const token = req.cookies.get('admin_token')?.value
@@ -49,6 +57,7 @@ export const config = {
   matcher: [
     '/admin/:path*',
     '/dashboard',
+    '/customer',
     '/api/workers/update/:path*',
     '/api/workers/portfolio/:path*',
     '/api/workers/payment-request',

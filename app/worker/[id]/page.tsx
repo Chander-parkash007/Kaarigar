@@ -11,6 +11,7 @@ import { CATEGORIES } from '@/lib/constants'
 import { Worker, Review, PortfolioPhoto } from '@/lib/types'
 import { ProfileViewTracker } from '@/components/workers/ProfileViewTracker'
 import { BookingForm } from '@/components/workers/BookingForm'
+import { SaveKarigarButton } from '@/components/workers/SaveKarigarButton'
 
 interface Props {
   params: Promise<{ id: string }>
@@ -116,6 +117,7 @@ export default async function WorkerProfilePage({ params }: Props) {
               >
                 🔗 Share
               </a>
+              <SaveKarigarButton workerId={id} />
             </div>
 
             {/* About */}

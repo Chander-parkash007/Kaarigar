@@ -10,6 +10,7 @@ import { getEffectiveTier, getWhatsAppLink, getTelLink, formatDate } from '@/lib
 import { CATEGORIES } from '@/lib/constants'
 import { Worker, Review, PortfolioPhoto } from '@/lib/types'
 import { ProfileViewTracker } from '@/components/workers/ProfileViewTracker'
+import { BookingForm } from '@/components/workers/BookingForm'
 
 interface Props {
   params: Promise<{ id: string }>
@@ -181,6 +182,9 @@ export default async function WorkerProfilePage({ params }: Props) {
 
           {/* Review Form */}
           <ReviewForm workerId={id} workerName={worker.full_name} />
+
+          {/* Booking Form */}
+          <BookingForm workerId={id} workerName={worker.full_name} />
         </div>
       </main>
       <Footer />

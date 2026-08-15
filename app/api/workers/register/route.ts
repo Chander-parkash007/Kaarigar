@@ -87,6 +87,52 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'Registration failed. Please try again.' }, { status: 500 })
     }
 
+    // Check for referral — if someone referred this phone, give both parties 7 extra days
+    try {
+      const { data: referral } = await supabase
+        .from('referrals')
+        .select('id, referrer_id, bonus_days')
+        .eq('referred_phone', phone)
+        .eq('status', 'pending')
+        .single()
+
+      if (referral) {
+        const bonusExpiry = new Date()
+        bonusExpiry.setDate(bonusExpiry.getDate() + referral.bonus_days)
+
+        // Give bonus to new worker
+        await supabase.from('workers').update({
+          boost_expires_at: bonusExpiry.toISOString(),
+        }).eq('id', worker.id)
+
+        // Give bonus to referrer too
+        const { data: referrer } = await supabase
+          .from('workers')
+          .select('boost_expires_at')
+          .eq('id', referral.referrer_id)
+          .single()
+
+        if (referrer) {
+          const referrerExpiry = referrer.boost_expires_at && new Date(referrer.boost_expires_at) > new Date()
+            ? new Date(referrer.boost_expires_at)
+            : new Date()
+          referrerExpiry.setDate(referrerExpiry.getDate() + referral.bonus_days)
+
+          await supabase.from('workers').update({
+            boost_expires_at: referrerExpiry.toISOString(),
+          }).eq('id', referral.referrer_id)
+        }
+
+        // Mark referral as completed
+        await supabase.from('referrals').update({
+          status: 'completed',
+          referred_worker_id: worker.id,
+        }).eq('id', referral.id)
+      }
+    } catch {
+      // Referral bonus is non-critical — don't block registration
+    }
+
     // Set auth cookie
     const token = signWorkerToken(worker.id)
     const response = NextResponse.json({ success: true, workerId: worker.id })

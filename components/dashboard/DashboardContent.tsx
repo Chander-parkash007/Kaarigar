@@ -8,6 +8,7 @@ import { Button } from '@/components/ui/Button'
 import { ADMIN_WHATSAPP, BOOST_PRICE_WEEKLY, VERIFIED_PRICE_MONTHLY, MAX_PORTFOLIO_PHOTOS } from '@/lib/constants'
 import { EditProfileModal } from './EditProfileModal'
 import { UpgradePaymentModal } from './UpgradePaymentModal'
+import { ReferralSection } from './ReferralSection'
 
 interface Props {
   worker: Worker
@@ -244,6 +245,9 @@ export function DashboardContent({ worker, portfolioPhotos }: Props) {
           </div>
         </div>
       </div>
+
+      {/* Referral Section */}
+      <ReferralSection workerPhone={worker.phone} />
 
       {/* Portfolio */}
       <div className="bg-white rounded-xl border border-gray-200 p-5">

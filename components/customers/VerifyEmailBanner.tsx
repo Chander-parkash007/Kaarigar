@@ -1,11 +1,7 @@
 'use client'
 import { useState } from 'react'
 
-interface Props {
-  customerName: string
-}
-
-export function VerifyEmailBanner({ customerName }: Props) {
+export function VerifyEmailBanner({ customerName }: { customerName: string }) {
   const [open, setOpen] = useState(false)
   const [email, setEmail] = useState('')
   const [otp, setOtp] = useState('')
@@ -53,6 +49,7 @@ export function VerifyEmailBanner({ customerName }: Props) {
       const data = await res.json()
       if (!res.ok) throw new Error(data.error)
       setSuccess(true)
+      // Reload page so banner disappears and review form unlocks
       setTimeout(() => window.location.reload(), 1500)
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Verification failed')
@@ -73,7 +70,7 @@ export function VerifyEmailBanner({ customerName }: Props) {
                 آپکا اکاؤنٹ مکمل تصدیق شدہ نہیں ہے
               </p>
               <p className="text-yellow-700 text-xs">
-                Your account is not fully verified. You can use KaariGar but cannot write reviews.{' '}
+                Account not fully verified. You can use KaariGar but cannot write reviews.{' '}
                 <button onClick={() => setOpen(true)} className="font-bold underline hover:text-yellow-900">
                   Verify in 2 mins →
                 </button>
@@ -85,12 +82,12 @@ export function VerifyEmailBanner({ customerName }: Props) {
               className="bg-yellow-500 hover:bg-yellow-600 text-white text-xs font-semibold px-4 py-1.5 rounded-lg transition-colors">
               ✅ Verify Now
             </button>
-            <button onClick={() => setDismissed(true)} className="text-yellow-500 hover:text-yellow-700 text-lg">×</button>
+            <button onClick={() => setDismissed(true)} className="text-yellow-500 hover:text-yellow-700 text-lg leading-none">×</button>
           </div>
         </div>
       </div>
 
-      {/* Verification Modal */}
+      {/* Modal */}
       {open && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
           <div className="bg-white rounded-2xl max-w-md w-full p-6 shadow-xl">
@@ -113,10 +110,10 @@ export function VerifyEmailBanner({ customerName }: Props) {
                         : `6-digit code sent to ${email}`}
                     </p>
                   </div>
-                  <button onClick={() => setOpen(false)} className="text-gray-400 hover:text-gray-600 text-2xl">×</button>
+                  <button onClick={() => setOpen(false)} className="text-gray-400 hover:text-gray-600 text-2xl leading-none">×</button>
                 </div>
 
-                {/* Progress */}
+                {/* Progress bar */}
                 <div className="flex items-center gap-2 mb-5">
                   <div className={`flex-1 h-1.5 rounded-full ${step === 'email' ? 'bg-[#FF6B00]' : 'bg-green-500'}`} />
                   <div className={`flex-1 h-1.5 rounded-full ${step === 'otp' ? 'bg-[#FF6B00]' : 'bg-gray-200'}`} />
@@ -126,14 +123,10 @@ export function VerifyEmailBanner({ customerName }: Props) {
                   <div className="space-y-4">
                     <div>
                       <label className="text-sm font-medium text-gray-700 block mb-1">Email Address</label>
-                      <input
-                        type="email"
-                        value={email}
-                        onChange={e => setEmail(e.target.value)}
+                      <input type="email" value={email} onChange={e => setEmail(e.target.value)}
                         placeholder="yourname@gmail.com"
                         className="w-full px-4 py-3 border border-gray-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#1B3A6B]"
-                        onKeyDown={e => e.key === 'Enter' && sendOTP()}
-                      />
+                        onKeyDown={e => e.key === 'Enter' && sendOTP()} />
                     </div>
                     {error && <p className="text-red-600 text-sm bg-red-50 p-2 rounded-lg">{error}</p>}
                     <button onClick={sendOTP} disabled={loading}
@@ -144,19 +137,13 @@ export function VerifyEmailBanner({ customerName }: Props) {
                 ) : (
                   <div className="space-y-4">
                     <div>
-                      <label className="text-sm font-medium text-gray-700 block mb-1">
-                        6-Digit Code
-                      </label>
-                      <input
-                        type="text"
-                        value={otp}
+                      <label className="text-sm font-medium text-gray-700 block mb-1">6-Digit Code</label>
+                      <input type="text" value={otp}
                         onChange={e => setOtp(e.target.value.replace(/\D/g, '').slice(0, 6))}
                         placeholder="123456"
-                        className="w-full px-4 py-3 border border-gray-300 rounded-xl text-sm text-center text-2xl tracking-widest font-bold focus:outline-none focus:ring-2 focus:ring-[#1B3A6B]"
-                        maxLength={6}
-                        onKeyDown={e => e.key === 'Enter' && verifyOTP()}
-                      />
-                      <p className="text-xs text-gray-500 mt-1 text-center">⏰ Code expires in 10 minutes</p>
+                        className="w-full px-4 py-3 border border-gray-300 rounded-xl text-center text-2xl tracking-widest font-bold focus:outline-none focus:ring-2 focus:ring-[#1B3A6B]"
+                        maxLength={6} onKeyDown={e => e.key === 'Enter' && verifyOTP()} />
+                      <p className="text-xs text-gray-500 mt-1 text-center">⏰ Expires in 10 minutes</p>
                     </div>
                     {error && <p className="text-red-600 text-sm bg-red-50 p-2 rounded-lg">{error}</p>}
                     <button onClick={verifyOTP} disabled={loading || otp.length !== 6}

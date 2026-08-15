@@ -7,6 +7,8 @@ import { Footer } from '@/components/layout/Footer'
 import { CustomerDashboard } from '@/components/customers/CustomerDashboard'
 import { VerifyEmailBanner } from '@/components/customers/VerifyEmailBanner'
 
+export const dynamic = 'force-dynamic' // Always fetch fresh data
+
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
   process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
@@ -21,7 +23,7 @@ export default async function CustomerPage() {
   if (!payload) redirect('/customer/login')
 
   const [customerRes, savedRes] = await Promise.all([
-    supabase.from('customers').select('id, full_name, phone, created_at').eq('id', payload.customerId).single(),
+    supabase.from('customers').select('id, full_name, phone, is_email_verified, created_at').eq('id', payload.customerId).single(),
     supabase.from('saved_karigars').select('worker_id, created_at, worker:workers(id, full_name, category, city, area, profile_photo_url, average_rating, review_count, tier, boost_expires_at, verified_expires_at, status)').eq('customer_id', payload.customerId).order('created_at', { ascending: false }),
   ])
 

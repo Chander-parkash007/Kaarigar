@@ -68,7 +68,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'You have already reviewed this karigar' }, { status: 409 })
     }
 
-    // Insert review as pending (requires admin approval)
+    // Insert review — auto-approved for verified customers
     const { error } = await supabase.from('reviews').insert({
       worker_id,
       reviewer_name: reviewer_name.trim().substring(0, 100),
@@ -76,7 +76,7 @@ export async function POST(req: NextRequest) {
       review_text: review_text?.trim()?.substring(0, 1000) || null,
       customer_id: payload.customerId,
       is_customer_verified: true,
-      status: 'pending',
+      status: 'approved', // auto-approve since customer is email-verified
     })
 
     if (error) {
@@ -86,7 +86,7 @@ export async function POST(req: NextRequest) {
 
     return NextResponse.json({
       success: true,
-      message: 'Review submitted! It will appear after admin approval.'
+      message: 'Review submitted successfully!'
     })
   } catch (err) {
     console.error('Review error:', err)

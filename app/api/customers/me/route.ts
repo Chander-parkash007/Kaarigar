@@ -3,6 +3,8 @@ import { createClient } from '@supabase/supabase-js'
 import { verifyCustomerToken } from '@/lib/auth'
 import { cookies } from 'next/headers'
 
+export const dynamic = 'force-dynamic'
+
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
   process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
@@ -19,7 +21,7 @@ export async function GET(req: NextRequest) {
 
     const { data: customer } = await supabase
       .from('customers')
-      .select('id, full_name, phone, created_at')
+      .select('id, full_name, phone, is_email_verified, created_at')
       .eq('id', payload.customerId)
       .single()
 
